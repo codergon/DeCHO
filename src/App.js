@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from "react";
+import stores from "./store/stores";
+import Navbar from "./components/Navbar";
+import MainApp from "./sections/MainApp";
+import { Provider as ReduxProvider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-function App() {
+const renderLoader = () => <p></p>;
+
+const App = () => {
+  const queryClient = new QueryClient();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={renderLoader()}>
+      <ReduxProvider store={stores}>
+        <QueryClientProvider client={queryClient}>
+          <>
+            <div className="main_cover">
+              <div className="container">
+                <Navbar />
+                <MainApp />
+              </div>
+            </div>
+          </>
+        </QueryClientProvider>
+      </ReduxProvider>
+    </Suspense>
   );
-}
+};
 
 export default App;
