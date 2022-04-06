@@ -116,7 +116,11 @@ const Vote = () => {
             onClick={() =>
               dispatch({
                 type: "use_modal",
-                modalData: { ...approvals[current - 1], type: "vote" },
+                modalData: {
+                  ...approvals[current - 1],
+                  type: "vote",
+                  currency: "CHOICE",
+                },
               })
             }
           >

@@ -1,20 +1,54 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { createTransaction, myAlgoConnect, algodClient } from "../utils";
 
 const AppModal = () => {
   const dispatch = useDispatch();
-
+  const [amountToSend, setAmountToSend] = useState(1);
+  const [copyText, setCopyText] = useState("Copy");
   const { openModal, modalData } = useSelector(
     (state) => state.status.modalStatus
   );
 
-  const [copyText, setCopyText] = useState("Copy");
+  const connectedWalletAddr = localStorage.getItem("walletAddr");
+
   const CopyAddress = () => {
     setCopyText("Copied");
     setTimeout(() => {
       setCopyText("Copy");
     }, 2000);
+  };
+
+  const onProceed = () => {
+    const newAmountToSend = parseFloat(amountToSend);
+
+    if (!connectedWalletAddr) {
+      return alert("Your wallet needs to be connected!");
+    }
+
+    if (newAmountToSend < 1) {
+      return alert(`You need to send a minimum of 1 $${modalData.currency}`);
+    }
+
+    const txnByte = createTransaction(
+      newAmountToSend,
+      modalData.decho_wallet.address,
+      connectedWalletAddr,
+      modalData.currency
+    );
+
+    myAlgoConnect.signTransaction(txnByte).then((signedTxn) => {
+      algodClient
+        .sendRawTransaction(signedTxn.blob)
+        .do()
+        .then((txnID) => {
+          return alert(
+            `Check donation status on https://algoexplorer.io/tx/${txnID}`
+          );
+        })
+        .catch((err) => alert("An error occured"));
+    });
   };
 
   return (
@@ -62,8 +96,9 @@ const AppModal = () => {
 
             <div className="vote_info">
               <p className="vote_info_hd">
-                Send $CHOICE to this address to {modalData?.type} or scan the
-                code below; $CHOICE sent will be refunded and rewarded!
+                Send ${modalData?.currency} to this address to {modalData?.type}{" "}
+                or scan the code below; ${modalData?.currency} sent will be
+                refunded and rewarded!
               </p>
             </div>
 
@@ -96,9 +131,15 @@ const AppModal = () => {
               <div className="input_amt_submit">
                 <div className="input_amt">
                   <p>Amount to vote</p>
-                  <input type="number" min={1} />
+                  <input
+                    type="number"
+                    min={1}
+                    onChange={(e) => setAmountToSend(e.target.value)}
+                  />
                 </div>
-                <button className="proceed_button">Proceed</button>
+                <button className="proceed_button" onClick={onProceed}>
+                  Proceed
+                </button>
               </div>
             </div>
 

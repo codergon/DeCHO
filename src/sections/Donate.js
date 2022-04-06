@@ -114,7 +114,11 @@ const Donate = () => {
             onClick={() =>
               dispatch({
                 type: "use_modal",
-                modalData: { ...donations[current - 1], type: "donate" },
+                modalData: {
+                  ...donations[current - 1],
+                  type: "donate",
+                  currency: "ALGO",
+                },
               })
             }
           >
