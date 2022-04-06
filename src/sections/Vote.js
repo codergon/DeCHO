@@ -1,6 +1,6 @@
 import arr from "./data";
 import Slider from "../components/Slider";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ProjectDetailsSlider from "../components/ProjectDetailsSlider";
 import { useDispatch } from "react-redux";
 
@@ -38,7 +38,10 @@ const Vote = () => {
 
   return (
     <div className="app_pages_container">
-      <div className="vote_slider">
+      <div
+        className="vote_slider"
+        style={{ paddingTop: isError === null ? "20px" : "50px" }}
+      >
         <div
           onClick={ToggleError}
           className="error_component"
@@ -110,6 +113,7 @@ const Vote = () => {
           </button>
           <a
             target="_blank"
+            rel="noreferrer"
             href={`${arr[current - 1]?.website}`}
             className="prj_website"
           >

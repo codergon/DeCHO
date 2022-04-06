@@ -1,5 +1,5 @@
 import $ from "jquery";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 const ProjectDetailsSlider = ({ arr, current, PrevSlide, NextSlide }) => {
   // Slider transform divisor and multiplier
@@ -11,7 +11,7 @@ const ProjectDetailsSlider = ({ arr, current, PrevSlide, NextSlide }) => {
     $("#data_slider_inn").css({
       transform: `translate3d(${divisorNext}, 0px, 0px)`,
     });
-  }, [current]);
+  }, [current, divisorNext]);
 
   return (
     <>

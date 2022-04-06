@@ -1,5 +1,5 @@
 import $ from "jquery";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
@@ -12,7 +12,7 @@ const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
     $("#slider_inn").css({
       transform: `translate3d(${divisorNext}, 0px, 0px)`,
     });
-  }, [current]);
+  }, [current, divisorNext]);
 
   return (
     <>
@@ -28,7 +28,7 @@ const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
                 <div
                   key={index}
                   className={
-                    current - 1 == index
+                    current - 1 === index
                       ? "slide_item slide_item_current"
                       : "slide_item"
                   }
@@ -48,31 +48,31 @@ const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
 
         <div className="slider_nav">
           <Link
-            to={`/${type == "vote" ? "donate" : "vote"}`}
+            to={`/${type === "vote" ? "donate" : "vote"}`}
             className="donate_link_button"
           >
-            {type == "vote" ? "Donate" : "Vote"} here
+            {type === "vote" ? "Donate" : "Vote"} here
           </Link>
 
           <div>
             <div
-              className={current == 1 ? "nav_button_fade" : "nav_button"}
+              className={current === 1 ? "nav_button_fade" : "nav_button"}
               onClick={PrevSlide}
               style={{
-                opacity: current == 1 ? 0.4 : 1,
-                cursor: current == 1 ? "not-allowed" : "pointer",
+                opacity: current === 1 ? 0.4 : 1,
+                cursor: current === 1 ? "not-allowed" : "pointer",
               }}
             >
               Prev
             </div>
             <div
               className={
-                current == arr.length ? "nav_button_fade" : "nav_button"
+                current === arr.length ? "nav_button_fade" : "nav_button"
               }
               onClick={NextSlide}
               style={{
-                opacity: current == arr.length ? 0.4 : 1,
-                cursor: current == arr.length ? "not-allowed" : "pointer",
+                opacity: current === arr.length ? 0.4 : 1,
+                cursor: current === arr.length ? "not-allowed" : "pointer",
               }}
             >
               Next

@@ -1,7 +1,7 @@
 import arr from "./data";
 import { useDispatch } from "react-redux";
 import Slider from "../components/Slider";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ProjectDetailsSlider from "../components/ProjectDetailsSlider";
 
 const Donate = () => {
@@ -110,6 +110,7 @@ const Donate = () => {
           </button>
           <a
             target="_blank"
+            rel="noreferrer"
             href={`${arr[current - 1]?.website}`}
             className="prj_website"
           >

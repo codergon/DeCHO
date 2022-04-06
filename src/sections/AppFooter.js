@@ -4,19 +4,28 @@ const AppFooter = () => {
   return (
     <footer className="app_footer">
       <ul className="socials">
-        <a target="_blank" href="https://www.twitter.com/AlgoDeCHO/">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.twitter.com/AlgoDeCHO/"
+        >
           <i className="uil uil-twitter"></i>&nbsp;Twitter
         </a>
-        <a target="_blank" href="https://www.linkedin.com/company/xcadecho">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.linkedin.com/company/xcadecho"
+        >
           <i className="uil uil-linkedin"></i>&nbsp;Linkedin
         </a>
         <a
           target="_blank"
+          rel="noreferrer"
           href="https://www.youtube.com/channel/UCyTgP56jmR6Pal5UY1xdFWg"
         >
           <i className="uil uil-youtube"></i>&nbsp;Youtube
         </a>
-        <a target="_blank" href="https://decho.finance">
+        <a target="_blank" rel="noreferrer" href="https://decho.finance">
           <i
             className="ph-arrow-circle-up-right-fill"
             style={{ marginBottom: "3px" }}
@@ -28,6 +37,8 @@ const AppFooter = () => {
       <a
         href="https://play.google.com/store/apps/details?id=com.redecho"
         target="_blank"
+        rel="noreferrer"
+        className="google_play_link"
       >
         <img src="/assets/icons/play-store.svg" alt="" />
       </a>

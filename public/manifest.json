@@ -1,25 +1,21 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "sizes": "192x192",
+      "type": "image/png",
+      "src": "//img1.wsimg.com/isteam/ip/bbf2e2b9-8e90-4a16-bb78-a729df33680f/favicon/5718e593-6a88-49d2-86ef-950b541fde51.png/:/rs=w:192,h:192,m"
     },
     {
-      "src": "logo192.png",
+      "sizes": "512x512",
       "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "//img1.wsimg.com/isteam/ip/bbf2e2b9-8e90-4a16-bb78-a729df33680f/favicon/5718e593-6a88-49d2-86ef-950b541fde51.png/:/rs=w:512,h:512,m"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "name": "DeCHO",
+  "short_name": "DeCHO",
+  "theme_color": "#0ab2c0",
+  "background_color": "#0ab2c0"
 }

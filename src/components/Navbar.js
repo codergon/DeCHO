@@ -7,7 +7,7 @@ const Navbar = () => {
         <div className="nav_logo">Decho Finance</div>
 
         <div className="settings">
-          <div className="connect_wallet">Connect &nbsp;Wallet</div>
+          <div className="connect_wallet">Connect&nbsp;Wallet</div>
         </div>
       </div>
     </nav>

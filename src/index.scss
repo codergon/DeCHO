@@ -1,8 +1,14 @@
 @import url("./reset.css");
 @import url("./fonts.css");
 
-#root {
-  height: 100vh;
+$pad_1: 5vw;
+:root {
+  --nav_height: 75px;
+
+  --bg_1: #000;
+  --brad: 12px;
+
+  --footer_height: 100px;
 }
 
 html,
@@ -10,10 +16,9 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   max-width: 1440px;
   overflow-x: hidden;
-  background: #000;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -57,14 +62,8 @@ input:active {
   background: transparent;
 }
 
-:root {
-  --pad_1: 5vw;
-  --nav_height: 75px;
-
-  --bg_1: #000;
-  --brad: 12px;
-
-  --footer_height: 100px;
+#root {
+  // height: 100%;
 }
 
 .header {
@@ -95,9 +94,7 @@ input:active {
     .nav_logo {
       width: 180px;
       font-size: 16px;
-      font-weight: bold;
       font-family: machina2;
-      letter-spacing: 0.01rem;
     }
 
     .nav_links {
@@ -113,14 +110,10 @@ input:active {
 
     .settings {
       .connect_wallet {
-        // color: #fff;
         cursor: pointer;
-        // display: none;
-        // background: var(--bg_1);
         border-radius: 8px;
-        font-weight: bold;
+        font-family: machina2;
         padding: 12px 10px 8px;
-        // border: 2px solid #666;
       }
     }
   }
@@ -130,7 +123,7 @@ input:active {
   width: 100vw;
   height: 100vh;
   background: #ffff;
-  padding: 0px var(--pad_1);
+  padding: 0px $pad_1;
 
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='100%25' width='100%25'%3E%3Cdefs%3E%3Cpattern id='doodad' width='40' height='40' viewBox='0 0 40 40' patternUnits='userSpaceOnUse' patternTransform='rotate(0)'%3E%3Crect width='100%25' height='100%25' fill='rgba(255, 255, 255,1)'/%3E%3Cpath d='M-0.5 20h1v1h-1zM39.5 20h1v1h-1z' fill='%23111111'/%3E%3Cpath d='M19.75 20h0.5v1h-0.5zM59.75 20h0.5v1h-0.5z' fill='%23ecc94b'/%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23doodad)' height='200%25' width='200%25'/%3E%3C/svg%3E ");
 }
@@ -355,11 +348,11 @@ input:active {
   }
 
   .app_pages_cover {
+    flex: 1;
     overflow: hidden;
     align-items: center;
     justify-content: center;
     padding-top: calc(var(--nav_height) / 2);
-    height: calc(100% - var(--nav_height));
 
     .app_pages_container {
       width: 100%;
@@ -705,7 +698,6 @@ input:active {
     }
 
     // PageNotFound
-
     .not_found_anim {
       height: min-content;
       overflow: hidden;
@@ -769,8 +761,184 @@ input:active {
       }
     }
 
-    img {
+    .google_play_link {
       height: 34px;
+      img {
+        height: 100%;
+      }
+    }
+  }
+}
+
+$breakpoint-mobile: 640px;
+$breakpoint-tablet: 1050px;
+@media (max-width: $breakpoint-tablet) {
+  .header {
+    padding: 30px 0px 5px;
+  }
+
+  .main_cover {
+    min-height: 100vh !important;
+    padding: 0px $pad_1 !important;
+    height: max-content !important;
+  }
+
+  .app_pages_cover {
+    .app_pages_container {
+      width: 100%;
+      justify-content: flex-start;
+      height: max-content !important;
+      flex-direction: column !important;
+      padding-top: 3vh !important;
+    }
+
+    .vote_slider {
+      width: 600px !important;
+      overflow: visible !important;
+      max-width: calc(100% - 20px);
+      margin: 0px auto !important;
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+      padding-bottom: 20px !important;
+
+      .slider_cover {
+        margin-bottom: 20px;
+        .slider_inn {
+          transition: transform 0.8s !important;
+          .slide_item {
+            transition: transform 0.8s !important;
+            padding: 10px 10px !important;
+            .image_cover {
+              .item_img {
+                height: auto !important;
+                aspect-ratio: 1.3 !important;
+              }
+            }
+          }
+        }
+      }
+
+      .slider_container {
+        overflow: visible !important;
+      }
+
+      .slider_nav {
+        .donate_link_button {
+          border-radius: 6px !important;
+          padding: 11px 15px 9px !important;
+        }
+        .nav_button,
+        .nav_button_fade {
+          border-radius: 6px !important;
+          padding: 8px 15px 6px !important;
+          margin: 0px 0px 0px 12px !important;
+        }
+      }
+
+      .error_component {
+        left: 0px !important;
+        width: 100% !important;
+      }
+    }
+
+    .intro_text {
+      width: 600px !important;
+      margin: 0px auto !important;
+      overflow: hidden !important;
+      max-width: calc(100% - 20px);
+      padding: 50px 18px 30px !important;
+
+      .sub {
+        max-width: 100%;
+      }
+
+      .get_started {
+        margin-top: 15px !important;
+        font-weight: normal !important;
+        font-family: machina2 !important;
+        padding: 13px 15px 10px !important;
+      }
+    }
+    .intro_card {
+      padding: 18px 18px 20px !important;
+      width: 600px !important;
+      max-width: calc(100% - 10px);
+      margin: 25px auto 4vh !important;
+    }
+
+    .vote_card {
+      padding: 18px 18px 20px !important;
+      width: 600px !important;
+      max-width: calc(100% - 10px);
+      margin: 25px auto 4vh !important;
+
+      .hd_title,
+      .vert_line {
+        display: none;
+      }
+
+      .data_slider_inn {
+        transition: transform 0.8s !important;
+      }
+
+      .vote_button_website {
+        .prj_website {
+          height: 41.5px !important;
+        }
+      }
+    }
+  }
+
+  footer {
+    height: max-content !important;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: var(--footer_height);
+    justify-content: center !important;
+    .socials {
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap !important;
+      a {
+        margin: 0px 6px 0px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .app_pages_cover {
+    .vote_slider {
+      overflow: hidden !important;
+    }
+    .intro_text {
+      font-size: 15px !important;
+      .main {
+        line-height: 120% !important;
+        font-size: 7vw !important;
+      }
+    }
+  }
+
+  footer {
+    padding-bottom: 60px;
+    flex-direction: column !important;
+    .socials {
+      margin: 0px 0px 10px !important;
+      a {
+        width: calc(50% - 12px);
+        margin: 0px 6px 10px !important;
+      }
+    }
+    .google_play_link {
+      width: calc(100% - 12px);
+      height: 45px !important;
+      display: flex;
+      align-items: center;
+      background: #000;
+      flex-direction: row;
+      border-radius: 6px;
+      justify-content: center;
     }
   }
 }

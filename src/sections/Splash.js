@@ -9,10 +9,9 @@ const Splash = () => {
           Decentralised <br /> Crowdfunding on the <br /> Algorand Blockchain
         </p>
         <p className="sub">
-          DeCHO is a product that focuses on Crowdfunding, DeCHO is not just
+          DeCHO is a product that focuses on crowdfunding, DeCHO is not just
           another crowd-funding platform, it’s the innovation that sets the
-          standard of what crowdfunding urgently needs to become: safe donations
-          and legitimate projects.
+          standard of what crowdfunding urgently needs to become.
         </p>
         <Link to={"/vote"} className="get_started">
           Get Started with Decho

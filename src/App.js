@@ -3,7 +3,6 @@ import stores from "./store/stores";
 import Navbar from "./components/Navbar";
 import MainApp from "./sections/MainApp";
 import { Provider as ReduxProvider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const renderLoader = () => <p></p>;
