@@ -1,6 +1,5 @@
-import arr from "./data";
 import Slider from "../components/Slider";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProjectDetailsSlider from "../components/ProjectDetailsSlider";
 import { useDispatch } from "react-redux";
 
@@ -9,6 +8,20 @@ const Vote = () => {
   const dispatch = useDispatch();
   const [current, update] = useState(2);
 
+  // Toggle to show error component function
+  const [isError, setIsError] = useState();
+  const [approvals, setApprovals] = useState([]);
+
+  useEffect(() => {
+    fetch("https://decho-staging.herokuapp.com/api/v1/causes")
+      .then((response) => response.json())
+      .then((data) => {
+        setIsError(false);
+        setApprovals(data.data.filter((cause) => cause.status === "pending"));
+      })
+      .catch((err) => setIsError(true));
+  }, [approvals, isError]);
+
   // Slide Controls
   const PrevSlide = () => {
     if (current !== 1) {
@@ -16,15 +29,13 @@ const Vote = () => {
     }
   };
   const NextSlide = () => {
-    if (current !== arr.length) {
+    if (current !== approvals.length) {
       update((prev) => prev + 1);
     }
   };
 
-  // Toggle to show error component function
-  const [isError, toggleStatus] = useState(false);
   const ToggleError = () =>
-    toggleStatus((prev) => {
+    setIsError((prev) => {
       if (prev === null) {
         return false;
       }
@@ -80,7 +91,7 @@ const Vote = () => {
         </div>
 
         <Slider
-          arr={arr}
+          arr={approvals}
           type={"vote"}
           current={current}
           PrevSlide={PrevSlide}
@@ -93,7 +104,7 @@ const Vote = () => {
         <hr className="vert_line" />
 
         <ProjectDetailsSlider
-          arr={arr}
+          arr={approvals}
           current={current}
           PrevSlide={PrevSlide}
           NextSlide={NextSlide}
@@ -105,7 +116,7 @@ const Vote = () => {
             onClick={() =>
               dispatch({
                 type: "use_modal",
-                modalData: { ...arr[current - 1], type: "vote" },
+                modalData: { ...approvals[current - 1], type: "vote" },
               })
             }
           >
@@ -114,7 +125,7 @@ const Vote = () => {
           <a
             target="_blank"
             rel="noreferrer"
-            href={`${arr[current - 1]?.website}`}
+            href={`${approvals[current - 1]?.long_description}`}
             className="prj_website"
           >
             <i className="ph-arrow-square-out-fill"></i>

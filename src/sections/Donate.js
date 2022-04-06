@@ -1,13 +1,27 @@
-import arr from "./data";
 import { useDispatch } from "react-redux";
 import Slider from "../components/Slider";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProjectDetailsSlider from "../components/ProjectDetailsSlider";
 
 const Donate = () => {
   // Current Slide Index
   const dispatch = useDispatch();
   const [current, update] = useState(2);
+
+  // Toggle to show error component function
+  const [isError, setIsError] = useState(false);
+
+  const [donations, setDonations] = useState([]);
+
+  useEffect(() => {
+    fetch("https://decho-staging.herokuapp.com/api/v1/causes")
+      .then((response) => response.json())
+      .then((data) => {
+        setIsError(false);
+        setDonations(data.data.filter((cause) => cause.status === "Approved"));
+      })
+      .catch((err) => setIsError(true));
+  }, [donations, isError]);
 
   // Slide Controls
   const PrevSlide = () => {
@@ -16,15 +30,13 @@ const Donate = () => {
     }
   };
   const NextSlide = () => {
-    if (current !== arr.length) {
+    if (current !== donations.length) {
       update((prev) => prev + 1);
     }
   };
 
-  // Toggle to show error component function
-  const [isError, toggleStatus] = useState(false);
   const ToggleError = () =>
-    toggleStatus((prev) => {
+    setIsError((prev) => {
       if (prev === null) {
         return false;
       }
@@ -77,7 +89,7 @@ const Donate = () => {
         </div>
 
         <Slider
-          arr={arr}
+          arr={donations}
           type={"donate"}
           current={current}
           PrevSlide={PrevSlide}
@@ -90,7 +102,7 @@ const Donate = () => {
         <hr className="vert_line" />
 
         <ProjectDetailsSlider
-          arr={arr}
+          arr={donations}
           current={current}
           PrevSlide={PrevSlide}
           NextSlide={NextSlide}
@@ -102,7 +114,7 @@ const Donate = () => {
             onClick={() =>
               dispatch({
                 type: "use_modal",
-                modalData: { ...arr[current - 1], type: "donate" },
+                modalData: { ...donations[current - 1], type: "donate" },
               })
             }
           >
@@ -111,7 +123,7 @@ const Donate = () => {
           <a
             target="_blank"
             rel="noreferrer"
-            href={`${arr[current - 1]?.website}`}
+            href={`${donations[current - 1]?.website}`}
             className="prj_website"
           >
             <i className="ph-arrow-square-out-fill"></i>

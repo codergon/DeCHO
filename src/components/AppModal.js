@@ -26,25 +26,35 @@ const AppModal = () => {
         <div className="app_modal_inn">
           <div className="app_modal_main">
             <div className="prj_name">
-              <p className="prj_title">{modalData?.name}</p>
-              <p className="prj_description">{modalData?.description}</p>
+              <p className="prj_title">{modalData?.title}</p>
+              <p className="prj_description">{modalData?.short_description}</p>
             </div>
 
             <div className="prj_progress">
               <div className="prj_progress_num">
                 <p>Target&nbsp;</p>
                 <i className="ph-arrow-right-fill"></i>&nbsp;
-                <span className="reached">{modalData?.reached} /</span>
-                <span className="target">&nbsp;{modalData?.target}</span>
+                <span className="reached"> {modalData?.balance}/</span>
+                <span className="target">
+                  &nbsp;
+                  {modalData.status === "Approved"
+                    ? modalData?.donations.goal
+                    : modalData?.cause_approval.goal}
+                </span>
               </div>
 
               <div className="prj_range">
                 <div
                   className="prj_range_reached"
                   style={{
-                    width: `calc(100% * ${
-                      modalData?.reached / modalData?.target
-                    })`,
+                    width:
+                      modalData.status === "Approved"
+                        ? `calc(100% * ${
+                            modalData?.balance / modalData?.donations.goal
+                          })`
+                        : `calc(100% * ${
+                            modalData?.balance / modalData?.cause_approval.goal
+                          })`,
                   }}
                 ></div>
               </div>
@@ -58,10 +68,10 @@ const AppModal = () => {
             </div>
 
             <div className="wallet_address">
-              <p>{modalData?.walletAddress}</p>
+              <p>{modalData?.decho_wallet.address}</p>
               <CopyToClipboard
                 id="copy_address"
-                text={modalData?.walletAddress}
+                text={modalData?.decho_wallet.address}
                 onCopy={CopyAddress}
                 className={
                   copyText === "Copied"

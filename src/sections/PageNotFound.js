@@ -19,8 +19,7 @@ const PageNotFound = () => {
     <div className="not_found_anim">
       <Lottie options={defaultOptions} />
       <div className="not_found_text">
-        <p className="main">Page Not Found</p>
-        <Link to={"./vote"}>Go back home</Link>
+        <Link to={"/"}>Help</Link>
       </div>
     </div>
   );

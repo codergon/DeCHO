@@ -37,7 +37,7 @@ const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
                   <div className="image_cover">
                     <div
                       className="item_img"
-                      style={{ backgroundImage: `url(${item?.imageUrl})` }}
+                      style={{ backgroundImage: `url(${item?.photo_url})` }}
                     />
                   </div>
                 </div>
@@ -51,7 +51,7 @@ const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
             to={`/${type === "vote" ? "donate" : "vote"}`}
             className="donate_link_button"
           >
-            {type === "vote" ? "Donate" : "Vote"} here
+            {type === "vote" ? "View Donations" : "View Approvals"}
           </Link>
 
           <div>

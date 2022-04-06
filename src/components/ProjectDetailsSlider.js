@@ -31,10 +31,10 @@ const ProjectDetailsSlider = ({ arr, current, PrevSlide, NextSlide }) => {
                 key={index}
               >
                 <div className="prj_name">
-                  <p className="prj_title">{item?.name}</p>
+                  <p className="prj_title">{item?.title}</p>
                   <p className="prj_description">
                     {/*  */}
-                    {item?.description}
+                    {item?.short_description}
                   </p>
                 </div>
 
@@ -42,15 +42,19 @@ const ProjectDetailsSlider = ({ arr, current, PrevSlide, NextSlide }) => {
                   <div className="prj_progress_num">
                     <p>Target&nbsp;</p>
                     <i className="ph-arrow-right-fill"></i>&nbsp;
-                    <span className="reached">{item?.reached} /</span>
-                    <span className="target">&nbsp;{item?.target}</span>
+                    <span className="reached">{item?.balance} /</span>
+                    <span className="target">
+                      &nbsp;{item?.cause_approval?.goal}
+                    </span>
                   </div>
 
                   <div className="prj_range">
                     <div
                       className="prj_range_reached"
                       style={{
-                        width: `calc(100% * ${item?.reached / item?.target})`,
+                        width: `calc(100% * ${
+                          item?.balance / item?.cause_approval?.goal
+                        })`,
                       }}
                     ></div>
                   </div>

@@ -26,11 +26,8 @@ const AppFooter = () => {
           <i className="uil uil-youtube"></i>&nbsp;Youtube
         </a>
         <a target="_blank" rel="noreferrer" href="https://decho.finance">
-          <i
-            className="ph-arrow-circle-up-right-fill"
-            style={{ marginBottom: "3px" }}
-          ></i>
-          &nbsp;DeCHO
+          <img src="/assets/decho-bw.png" alt="" style={{ maxWidth: "14px" }} />
+          <span style={{ paddingTop: "2px" }}>&nbsp;DeCHO</span>
         </a>
       </ul>
 
