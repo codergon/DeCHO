@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { createTransaction, myAlgoConnect, algodClient } from "../utils";
+import {
+  createTransaction,
+  myAlgoConnect,
+  algodClient,
+  canMakeApprovalTxn,
+  canMakeDonationTxn,
+} from "../utils";
 
 const AppModal = () => {
   const dispatch = useDispatch();
@@ -31,23 +37,39 @@ const AppModal = () => {
       return alert(`You need to send a minimum of 1 $${modalData.currency}`);
     }
 
-    const txnByte = createTransaction(
+    if (modalData.currency === "ALGO") {
+      canMakeDonationTxn(connectedWalletAddr, newAmountToSend * 1000000);
+    } else if (modalData.currency === "CHOICE") {
+      canMakeApprovalTxn(connectedWalletAddr, 71501663, newAmountToSend);
+    }
+
+    createTransaction(
       newAmountToSend,
       modalData.decho_wallet.address,
       connectedWalletAddr,
       modalData.currency
-    );
-
-    myAlgoConnect.signTransaction(txnByte).then((signedTxn) => {
-      algodClient
-        .sendRawTransaction(signedTxn.blob)
-        .do()
-        .then((txnID) => {
-          return alert(
-            `Check donation status on https://algoexplorer.io/tx/${txnID}`
-          );
+    ).then((txn) => {
+      console.log(txn);
+      myAlgoConnect
+        .signTransaction(txn.toByte())
+        .then((signedTxn) => {
+          algodClient
+            .sendRawTransaction(signedTxn.blob)
+            .do()
+            .then((submittedTxn) => {
+              return alert(
+                `Check donation status on https://algoexplorer.io/tx/${submittedTxn.txId}`
+              );
+            })
+            .catch((err) =>
+              alert(
+                "An error occured while submitting the transaction to the blockchain!"
+              )
+            );
         })
-        .catch((err) => alert("An error occured"));
+        .catch((err) =>
+          alert("An error occured while signing the transaction!")
+        );
     });
   };
 
@@ -116,7 +138,7 @@ const AppModal = () => {
               >
                 <button>
                   <span>
-                    <i class="ph-copy-fill"></i>
+                    <i className="ph-copy-fill"></i>
                   </span>
                   <p>{copyText}</p>
                 </button>
