@@ -7,7 +7,10 @@ import {
   algodClient,
   canMakeApprovalTxn,
   canMakeDonationTxn,
+  connector,
 } from "../utils";
+import { encodeUnsignedTransaction } from "algosdk";
+import { formatJsonRpcRequest } from "@json-rpc-tools/utils";
 
 const AppModal = () => {
   const dispatch = useDispatch();
@@ -18,6 +21,7 @@ const AppModal = () => {
   );
 
   const connectedWalletAddr = localStorage.getItem("walletAddr");
+  const connectedWalletProvider = localStorage.getItem("walletProvider");
 
   const CopyAddress = () => {
     setCopyText("Copied");
@@ -29,7 +33,7 @@ const AppModal = () => {
   const onProceed = () => {
     const newAmountToSend = parseFloat(amountToSend);
 
-    if (!connectedWalletAddr) {
+    if (!connectedWalletAddr || !connectedWalletProvider) {
       return alert("Your wallet needs to be connected!");
     }
 
@@ -49,27 +53,73 @@ const AppModal = () => {
       connectedWalletAddr,
       modalData.currency
     ).then((txn) => {
-      console.log(txn);
-      myAlgoConnect
-        .signTransaction(txn.toByte())
-        .then((signedTxn) => {
-          algodClient
-            .sendRawTransaction(signedTxn.blob)
-            .do()
-            .then((submittedTxn) => {
-              return alert(
-                `Check donation status on https://algoexplorer.io/tx/${submittedTxn.txId}`
+      if (connectedWalletProvider === "myalgo") {
+        myAlgoConnect
+          .signTransaction(txn.toByte())
+          .then((signedTxn) => {
+            algodClient
+              .sendRawTransaction(signedTxn.blob)
+              .do()
+              .then((submittedTxn) => {
+                return alert(
+                  `Check donation status on https://algoexplorer.io/tx/${submittedTxn.txId}`
+                );
+              })
+              .catch((err) =>
+                alert(
+                  "An error occured while submitting the transaction to the blockchain!"
+                )
               );
-            })
-            .catch((err) =>
-              alert(
-                "An error occured while submitting the transaction to the blockchain!"
-              )
-            );
-        })
-        .catch((err) =>
-          alert("An error occured while signing the transaction!")
-        );
+          })
+          .catch((err) =>
+            alert("An error occured while signing the transaction!")
+          );
+      } else if (connectedWalletProvider === "pera") {
+        const txnsToSign = [txn].map((txn) => {
+          const encodedTxn = Buffer.from(
+            encodeUnsignedTransaction(txn)
+          ).toString("base64");
+          return {
+            txn: encodedTxn,
+            message: "DeCHO",
+          };
+        });
+
+        const requestParams = [txnsToSign];
+        const request = formatJsonRpcRequest("algo_signTxn", requestParams);
+
+        connector
+          .sendCustomRequest(request)
+          .then((result) => {
+            const decodedR = result.map((element) => {
+              return element
+                ? new Uint8Array(Buffer.from(element, "base64"))
+                : null;
+            });
+
+            // Do something if successful
+            algodClient
+              .sendRawTransaction(decodedR)
+              .do()
+              .then((result) => {
+                return alert(
+                  `Check donation status on https://algoexplorer.io/tx/${result.txId}`
+                );
+              })
+              .catch((error) => {
+                alert(
+                  "An error occured while submitting the transaction to the blockchain!"
+                );
+              });
+          })
+          .catch(
+            (error) => {
+              console.log(error);
+              alert(error);
+            }
+            // alert("An error occured while signing the transaction!")
+          );
+      }
     });
   };
 

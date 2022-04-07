@@ -1,26 +1,33 @@
 import React, { useState } from "react";
-
 import { humanizeAddr, myAlgoConnect } from "../utils";
+import { useDispatch } from "react-redux";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [walletAddr, setWalletAddr] = useState(
     localStorage.getItem("walletAddr")
   );
+  const [walletProvider, setWalletProvider] = useState(
+    localStorage.getItem("walletProvider")
+  );
 
   const onConnectWallet = async () => {
-    if (!walletAddr) {
-      const accounts = await myAlgoConnect.connect({
-        shouldSelectOneAccount: true,
+    if (!walletAddr || !walletProvider) {
+      dispatch({
+        type: "open_connect_wallet_modal",
+        connectWalletModal: { openModal: true },
       });
-      localStorage.setItem("walletAddr", accounts[0].address);
-      setWalletAddr(accounts[0].address);
     }
   };
 
   const onDisconnectWallet = () => {
     localStorage.removeItem("walletAddr");
+    localStorage.removeItem("walletProvider");
+
     setWalletAddr("");
   };
+
+  console.log(walletAddr, walletProvider);
 
   return (
     <nav className="header">

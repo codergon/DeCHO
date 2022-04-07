@@ -5,6 +5,7 @@ const status = (
     darkTheme: localStorage.getItem("mode") === "light" ? false : true,
     modalMenu: { openModal: false, modalType: "menu" },
     modalStatus: { openModal: false, modalData: null },
+    connectWalletModal: { openModal: false },
   },
   action
 ) => {
@@ -23,6 +24,18 @@ const status = (
       };
     case "close_modal":
       return { ...state, modalStatus: { openModal: false, modalData: null } };
+
+    case "open_connect_wallet_modal":
+      return {
+        ...state,
+        connectWalletModal: { openModal: true },
+      };
+
+    case "close_connect_wallet_modal":
+      return {
+        ...state,
+        connectWalletModal: { openModal: false },
+      };
 
     default:
       return state;

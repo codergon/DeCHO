@@ -1,5 +1,7 @@
 import MyAlgoConnect from "@randlabs/myalgo-connect";
 import algosdk from "algosdk";
+import WalletConnectQRCodeModal from "algorand-walletconnect-qrcode-modal";
+import WalletConnect from "@walletconnect/client";
 
 const myAlgoConnect = new MyAlgoConnect();
 const algodClient = new algosdk.Algodv2(
@@ -12,6 +14,10 @@ const indexerClient = new algosdk.Indexer(
   "https://algoindexer.testnet.algoexplorerapi.io",
   ""
 );
+const connector = new WalletConnect({
+  bridge: "https://bridge.walletconnect.org",
+  qrcodeModal: WalletConnectQRCodeModal,
+});
 
 const humanizeAddr = (address) =>
   address.substring(0, 3) + "..." + address.substring(55, 58);
@@ -101,4 +107,5 @@ export {
   createTransaction,
   canMakeApprovalTxn,
   canMakeDonationTxn,
+  connector,
 };

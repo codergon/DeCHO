@@ -6,11 +6,13 @@ import AppFooter from "./AppFooter";
 import PageNotFound from "./PageNotFound";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppModal from "../components/AppModal";
+import ConnectWalletModal from "../components/ConnectWalletModal";
 
 const MainApp = () => {
   return (
     <div className="mainapp_container">
       <AppModal />
+      <ConnectWalletModal />
 
       <div className="app_pages_cover">
         <BrowserRouter>
