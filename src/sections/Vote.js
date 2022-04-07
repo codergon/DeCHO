@@ -20,7 +20,7 @@ const Vote = () => {
         setApprovals(data.data.filter((cause) => cause.status === "pending"));
       })
       .catch((err) => setIsError(true));
-  }, [approvals, isError]);
+  }, []);
 
   // Slide Controls
   const PrevSlide = () => {

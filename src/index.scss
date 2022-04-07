@@ -537,7 +537,8 @@ input:active {
                 height: 400px;
                 max-width: 80%;
                 max-height: 80%;
-                background-size: contain;
+                background-size:cover;
+                // object-fit: cover;
                 background-position: center;
                 background-repeat: no-repeat;
               }

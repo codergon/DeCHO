@@ -21,7 +21,7 @@ const Donate = () => {
         setDonations(data.data.filter((cause) => cause.status === "Approved"));
       })
       .catch((err) => setIsError(true));
-  }, [donations, isError]);
+  }, []);
 
   // Slide Controls
   const PrevSlide = () => {
