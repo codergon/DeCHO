@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { humanizeAddr, myAlgoConnect } from "../utils";
+import { humanizeAddr, myAlgoConnect, connector } from "../utils";
 import { useDispatch } from "react-redux";
 
 const Navbar = () => {
@@ -21,10 +21,15 @@ const Navbar = () => {
   };
 
   const onDisconnectWallet = () => {
+    if (walletProvider === "pera") {
+      connector.killSession();
+    }
+
     localStorage.removeItem("walletAddr");
     localStorage.removeItem("walletProvider");
 
     setWalletAddr("");
+    setWalletProvider("");
   };
 
   console.log(walletAddr, walletProvider);
