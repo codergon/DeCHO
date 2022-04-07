@@ -129,7 +129,7 @@ const Vote = () => {
           <a
             target="_blank"
             rel="noreferrer"
-            href={`${approvals[current - 1]?.long_description}`}
+            href={`https://${approvals[current - 1]?.long_description}`}
             className="prj_website"
           >
             <i className="ph-arrow-square-out-fill"></i>

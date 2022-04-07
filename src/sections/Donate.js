@@ -127,7 +127,7 @@ const Donate = () => {
           <a
             target="_blank"
             rel="noreferrer"
-            href={`${donations[current - 1]?.website}`}
+            href={`https://${donations[current - 1]?.long_description}`}
             className="prj_website"
           >
             <i className="ph-arrow-square-out-fill"></i>
