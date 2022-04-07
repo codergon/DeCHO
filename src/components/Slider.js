@@ -35,10 +35,7 @@ const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
                   style={{ width: divisor }}
                 >
                   <div className="image_cover">
-                    <div
-                      className="item_img"
-                      style={{ backgroundImage: `url(${item?.photo_url})` }}
-                    />
+                    <img className="item_img" src={item?.photo_url} alt="" />
                   </div>
                 </div>
               );
