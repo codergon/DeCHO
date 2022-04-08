@@ -485,7 +485,6 @@ input:active {
         white-space: nowrap;
         overflow: hidden;
         color: #555;
-        cursor: pointer;
         span {
           font-size: 17px;
           padding-top: 2px;
@@ -506,6 +505,19 @@ input:active {
         height: calc(100% - 60px);
         max-width: 90%;
         flex-direction: column;
+
+        .loading_container {
+          flex: 1;
+          height: 100%;
+          display: flex;
+          min-height: 200px;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          p {
+            margin-bottom: 20px;
+          }
+        }
 
         .slider_inn {
           height: 100%;

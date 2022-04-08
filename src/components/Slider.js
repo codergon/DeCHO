@@ -1,6 +1,7 @@
 import $ from "jquery";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import BarLoader from "react-spinners/BarLoader";
 
 const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
   // Slider transform divisor and multiplier
@@ -18,29 +19,36 @@ const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
     <>
       <div className="slider_container">
         <div className="slider_cover">
-          <div
-            id="slider_inn"
-            className="slider_inn"
-            style={{ width: multiplier }}
-          >
-            {arr.map((item, index) => {
-              return (
-                <div
-                  key={index}
-                  className={
-                    current - 1 === index
-                      ? "slide_item slide_item_current"
-                      : "slide_item"
-                  }
-                  style={{ width: divisor }}
-                >
-                  <div className="image_cover">
-                    <img className="item_img" src={item?.photo_url} alt="" />
+          {!!(arr?.length !== 0) ? (
+            <div
+              id="slider_inn"
+              className="slider_inn"
+              style={{ width: multiplier }}
+            >
+              {arr.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={
+                      current - 1 === index
+                        ? "slide_item slide_item_current"
+                        : "slide_item"
+                    }
+                    style={{ width: divisor }}
+                  >
+                    <div className="image_cover">
+                      <img className="item_img" src={item?.photo_url} alt="" />
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="loading_container">
+              <p>Fetching...</p>
+              <BarLoader color="#777" size={30} />
+            </div>
+          )}
         </div>
 
         <div className="slider_nav">
