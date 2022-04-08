@@ -99,16 +99,18 @@ const Vote = () => {
         <div className="vote_button_website">
           <button
             className="vote_button"
-            onClick={() =>
-              dispatch({
-                type: "use_modal",
-                modalData: {
-                  ...approvals[current - 1],
-                  type: "vote",
-                  currency: "CHOICE",
-                },
-              })
-            }
+            onClick={() => {
+              if (!!approvals[current - 1]) {
+                dispatch({
+                  type: "use_modal",
+                  modalData: {
+                    ...approvals[current - 1],
+                    type: "vote",
+                    currency: "CHOICE",
+                  },
+                });
+              }
+            }}
           >
             Vote for project
           </button>

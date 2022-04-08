@@ -111,16 +111,18 @@ const Donate = () => {
         <div className="vote_button_website">
           <button
             className="vote_button"
-            onClick={() =>
-              dispatch({
-                type: "use_modal",
-                modalData: {
-                  ...donations[current - 1],
-                  type: "donate",
-                  currency: "ALGO",
-                },
-              })
-            }
+            onClick={() => {
+              if (!!donations[current - 1]) {
+                dispatch({
+                  type: "use_modal",
+                  modalData: {
+                    ...donations[current - 1],
+                    type: "donate",
+                    currency: "ALGO",
+                  },
+                });
+              }
+            }}
           >
             Donate towards project
           </button>
