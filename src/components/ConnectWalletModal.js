@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { myAlgoConnect, connector } from "../utils";
+import { myAlgoConnect } from "../utils";
 import React, { useState } from "react";
+
+import WalletConnectQRCodeModal from "algorand-walletconnect-qrcode-modal";
+import WalletConnect from "@walletconnect/client";
 
 const ConnectWalletModal = () => {
   const { openModal } = useSelector((state) => state.status.connectWalletModal);
@@ -15,6 +18,7 @@ const ConnectWalletModal = () => {
       const accounts = await myAlgoConnect.connect({
         shouldSelectOneAccount: true,
       });
+
       localStorage.setItem("walletAddr", accounts[0].address);
       localStorage.setItem("walletProvider", "myalgo");
 
@@ -28,7 +32,13 @@ const ConnectWalletModal = () => {
   };
 
   const onSelectPeraWallet = () => {
+    const connector = new WalletConnect({
+      bridge: "https://bridge.walletconnect.org",
+      qrcodeModal: WalletConnectQRCodeModal,
+    });
+
     if (!connector.connected) {
+      console.log("Another one");
       connector.createSession();
     }
 
@@ -67,8 +77,10 @@ const ConnectWalletModal = () => {
       }
 
       console.log("Disconnected...");
+
       localStorage.removeItem("walletAddr");
       localStorage.removeItem("walletProvider");
+
       window.location.reload();
     });
   };
