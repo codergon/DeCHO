@@ -73,7 +73,7 @@ const Donate = () => {
                   style={{ color: "#e84e4e" }}
                 ></i>
               </span>
-              <p>Error loading data from the server!!</p>
+              <p>Error fetching data!!</p>
             </>
           ) : isError === false ? (
             <>
@@ -83,7 +83,7 @@ const Donate = () => {
                   style={{ color: "#1fa647" }}
                 ></i>
               </span>
-              <p>Success fetching data from server 🤙</p>
+              <p>Data fetched successfully 🤙</p>
             </>
           ) : null}
         </div>
