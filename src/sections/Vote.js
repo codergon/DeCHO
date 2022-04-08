@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 const Vote = () => {
   // Current Slide Index
   const dispatch = useDispatch();
-  const [current, update] = useState(2);
+  const [current, update] = useState(1);
 
   // Toggle to show error component function
   const [isError, setIsError] = useState();
@@ -34,19 +34,6 @@ const Vote = () => {
     }
   };
 
-  const ToggleError = () =>
-    setIsError((prev) => {
-      if (prev === null) {
-        return false;
-      }
-      if (prev === false) {
-        return true;
-      }
-      if (prev === true) {
-        return null;
-      }
-    });
-
   return (
     <div className="app_pages_container">
       <div
@@ -54,7 +41,6 @@ const Vote = () => {
         style={{ paddingTop: isError === null ? "20px" : "50px" }}
       >
         <div
-          onClick={ToggleError}
           className="error_component"
           style={{
             background:

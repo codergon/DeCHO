@@ -6,7 +6,7 @@ import ProjectDetailsSlider from "../components/ProjectDetailsSlider";
 const Donate = () => {
   // Current Slide Index
   const dispatch = useDispatch();
-  const [current, update] = useState(2);
+  const [current, update] = useState(1);
 
   // Toggle to show error component function
   const [isError, setIsError] = useState(false);
