@@ -9,7 +9,6 @@ const ConnectWalletModal = () => {
   const [walletAddr, setWalletAddr] = useState(
     localStorage.getItem("walletAddr")
   );
-  const [walletProvider, _] = useState(localStorage.getItem("walletProvider"));
 
   const onSelectMyAlgoWallet = async () => {
     if (!walletAddr) {

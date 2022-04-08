@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { humanizeAddr, myAlgoConnect, connector } from "../utils";
+import { humanizeAddr, connector } from "../utils";
 import { useDispatch } from "react-redux";
 
 const Navbar = () => {
