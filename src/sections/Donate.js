@@ -13,14 +13,21 @@ const Donate = () => {
 
   const [donations, setDonations] = useState([]);
 
+  // Fetching data
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     fetch("https://decho-mainnet.herokuapp.com/api/v1/causes")
       .then((response) => response.json())
       .then((data) => {
         setIsError(false);
         setDonations(data.data.filter((cause) => cause.status === "Approved"));
+        setLoading(false);
       })
-      .catch((err) => setIsError(true));
+      .catch((err) => {
+        setIsError(true);
+        setLoading(false);
+      });
   }, []);
 
   // Slide Controls
@@ -91,6 +98,7 @@ const Donate = () => {
         <Slider
           arr={donations}
           type={"donate"}
+          loading={loading}
           current={current}
           PrevSlide={PrevSlide}
           NextSlide={NextSlide}

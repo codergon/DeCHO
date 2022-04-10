@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const AppFooter = () => {
+  const darkTheme = useSelector((state) => state.status.darkTheme);
+
   return (
     <footer className="app_footer">
       <ul className="socials">
@@ -26,7 +29,11 @@ const AppFooter = () => {
           <i className="uil uil-youtube"></i>&nbsp;Youtube
         </a>
         <a target="_blank" rel="noreferrer" href="https://decho.finance">
-          <img src="/assets/decho-bw.png" alt="" style={{ maxWidth: "14px" }} />
+          <img
+            src={`/assets/decho-${darkTheme ? "w" : "bw"}.png`}
+            alt=""
+            style={{ maxWidth: "14px" }}
+          />
           <span style={{ paddingTop: "2px" }}>&nbsp;DeCHO</span>
         </a>
       </ul>

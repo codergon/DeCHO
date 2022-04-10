@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import BarLoader from "react-spinners/BarLoader";
 
-const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
+const Slider = ({ arr, type, current, loading, PrevSlide, NextSlide }) => {
   // Slider transform divisor and multiplier
   const divisor = `calc(100% / (${arr.length}))`;
   const multiplier = `calc(100% * (${arr.length}))`;
@@ -19,7 +19,12 @@ const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
     <>
       <div className="slider_container">
         <div className="slider_cover">
-          {!!(arr?.length !== 0) ? (
+          {!!loading ? (
+            <div className="loading_container">
+              <p>Fetching...</p>
+              <BarLoader color="#777" size={30} />
+            </div>
+          ) : !!(arr?.length !== 0) ? (
             <div
               id="slider_inn"
               className="slider_inn"
@@ -45,8 +50,10 @@ const Slider = ({ arr, type, current, PrevSlide, NextSlide }) => {
             </div>
           ) : (
             <div className="loading_container">
-              <p>Fetching...</p>
-              <BarLoader color="#777" size={30} />
+              <p>
+                No {type === "vote" ? "Approvals" : "Donations"} available
+                currently server
+              </p>
             </div>
           )}
         </div>

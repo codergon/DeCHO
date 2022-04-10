@@ -12,14 +12,21 @@ const Vote = () => {
   const [isError, setIsError] = useState();
   const [approvals, setApprovals] = useState([]);
 
+  // Fetching data
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     fetch("https://decho-mainnet.herokuapp.com/api/v1/causes")
       .then((response) => response.json())
       .then((data) => {
         setIsError(false);
         setApprovals(data.data.filter((cause) => cause.status === "pending"));
+        setLoading(false);
       })
-      .catch((err) => setIsError(true));
+      .catch((err) => {
+        setIsError(true);
+        setLoading(false);
+      });
   }, []);
 
   // Slide Controls
@@ -79,6 +86,7 @@ const Vote = () => {
         <Slider
           arr={approvals}
           type={"vote"}
+          loading={loading}
           current={current}
           PrevSlide={PrevSlide}
           NextSlide={NextSlide}

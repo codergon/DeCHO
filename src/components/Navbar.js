@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { humanizeAddr, connector } from "../utils";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Toggle from "./Toggle";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -32,28 +33,32 @@ const Navbar = () => {
     setWalletProvider("");
   };
 
-  console.log(walletAddr, walletProvider);
+  const darkTheme = useSelector((state) => state.status.darkTheme);
 
   return (
     <nav className="header">
       <div className="navbar_inn">
         <div className="nav_logo">
           <img
-            src="/assets/decho-logo-bw.png"
+            src={`/assets/decho-logo-${darkTheme ? "w" : "bw"}.png`}
             alt=""
             style={{ maxWidth: "150px" }}
           />
         </div>
 
         <div className="settings">
+          <div className="mode_switch">
+            <Toggle />
+          </div>
+
           <div className="connect_wallet">
             {walletAddr ? (
               <>
                 <button
                   style={{
-                    border: "1px solid black",
+                    border: `1px solid ${darkTheme ? "#999" : "#000"}`,
                     borderRadius: "8px",
-                    padding: "12px 6px",
+                    padding: "9px 8px 7px",
                   }}
                   onClick={onConnectWallet}
                 >
@@ -62,10 +67,10 @@ const Navbar = () => {
 
                 <button
                   style={{
-                    border: "1px solid black",
+                    border: `1px solid ${darkTheme ? "#999" : "#000"}`,
                     marginLeft: "4px",
                     borderRadius: "8px",
-                    padding: "12px 6px",
+                    padding: "9px 8px 7px",
                   }}
                   onClick={onDisconnectWallet}
                 >
@@ -75,9 +80,9 @@ const Navbar = () => {
             ) : (
               <button
                 style={{
-                  border: "1px solid black",
+                  border: `1px solid ${darkTheme ? "#999" : "#000"}`,
                   borderRadius: "8px",
-                  padding: "12px 6px",
+                  padding: "9px 8px 7px",
                 }}
                 onClick={onConnectWallet}
               >

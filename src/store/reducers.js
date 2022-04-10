@@ -12,8 +12,10 @@ const status = (
   switch (action.type) {
     //   Set Dark mode / Light mode
     case "light_mode":
+      localStorage.setItem("mode", "light");
       return { ...state, darkTheme: false };
     case "dark_mode":
+      localStorage.setItem("mode", "dark");
       return { ...state, darkTheme: true };
 
     // Use Modal
