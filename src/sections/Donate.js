@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "../components/Slider";
 import React, { useEffect, useState } from "react";
 import ProjectDetailsSlider from "../components/ProjectDetailsSlider";
@@ -10,7 +10,6 @@ const Donate = () => {
 
   // Toggle to show error component function
   const [isError, setIsError] = useState(false);
-
   const [donations, setDonations] = useState([]);
 
   // Fetching data
@@ -42,24 +41,15 @@ const Donate = () => {
     }
   };
 
-  const ToggleError = () =>
-    setIsError((prev) => {
-      if (prev === null) {
-        return false;
-      }
-      if (prev === false) {
-        return true;
-      }
-      if (prev === true) {
-        return null;
-      }
-    });
+  const darkTheme = useSelector((state) => state.status.darkTheme);
 
   return (
     <div className="app_pages_container">
-      <div className="vote_slider">
+      <div
+        className="vote_slider"
+        style={{ paddingTop: isError === null ? "20px" : "50px" }}
+      >
         <div
-          onClick={ToggleError}
           className="error_component"
           style={{
             background:
@@ -69,7 +59,12 @@ const Donate = () => {
                 ? "rgba(0,255,0, 0.08)"
                 : "transparent",
 
-            border: isError === true || (isError === false && "1px solid #eee"),
+            border:
+              isError === true || isError === false
+                ? darkTheme
+                  ? "1px solid #444"
+                  : "1px solid #eee"
+                : "",
           }}
         >
           {isError === true ? (

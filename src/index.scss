@@ -73,6 +73,9 @@ input:active {
   // height: 100%;
 }
 
+$breakpoint-mobile: 640px;
+$breakpoint-tablet: 1050px;
+
 .header {
   top: 0;
   z-index: 99;
@@ -97,19 +100,13 @@ input:active {
     justify-content: space-between;
 
     .nav_logo {
-      width: 180px;
+      width: 150px;
       font-size: 16px;
+      overflow: hidden;
       font-family: machina2;
-    }
 
-    .nav_links {
-      li {
-        padding: 10px 12px;
-        .nav_icon {
-          font-size: 10px;
-          margin-top: 2px;
-          margin-left: 5px;
-        }
+      img {
+        width: 100%;
       }
     }
 
@@ -137,6 +134,35 @@ input:active {
         cursor: pointer;
         border-radius: 8px;
         font-family: machina2;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .header {
+    .navbar_inn {
+      .nav_logo {
+        width: 100px;
+      }
+
+      .settings {
+        .mode_switch {
+          margin-right: 4px !important;
+
+          .react-switch {
+            margin: 0px 0px !important;
+            transform: scale(0.9);
+          }
+        }
+
+        .connect_wallet {
+          cursor: pointer;
+          font-size: 12px;
+          border-radius: 8px;
+          transform: scale(0.9);
+          font-family: machina2;
+        }
       }
     }
   }
@@ -508,7 +534,7 @@ input:active {
           position: absolute;
           white-space: nowrap;
           overflow: hidden;
-          color: #555;
+          color: #777;
           span {
             font-size: 17px;
             padding-top: 2px;
@@ -805,8 +831,6 @@ input:active {
     }
   }
 
-  $breakpoint-mobile: 640px;
-  $breakpoint-tablet: 1050px;
   @media (max-width: $breakpoint-tablet) {
     min-height: 100vh !important;
     padding: 0px $pad_1 !important;
@@ -853,6 +877,7 @@ input:active {
 
         .slider_nav {
           .donate_link_button {
+            font-size: 14px !important;
             border-radius: 6px !important;
             padding: 11px 15px 9px !important;
           }

@@ -1,11 +1,8 @@
-import { useState } from "react";
 import Switch from "react-switch";
 import { useDispatch, useSelector } from "react-redux";
 
 const Toggle = () => {
   const dispatch = useDispatch();
-
-  const [checked, setChecked] = useState(false);
 
   const darkTheme = useSelector((state) => state.status.darkTheme);
 

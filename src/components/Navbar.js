@@ -42,7 +42,6 @@ const Navbar = () => {
           <img
             src={`/assets/decho-logo-${darkTheme ? "w" : "bw"}.png`}
             alt=""
-            style={{ maxWidth: "150px" }}
           />
         </div>
 

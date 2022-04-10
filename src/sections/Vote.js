@@ -1,7 +1,7 @@
 import Slider from "../components/Slider";
 import React, { useEffect, useState } from "react";
 import ProjectDetailsSlider from "../components/ProjectDetailsSlider";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Vote = () => {
   // Current Slide Index
@@ -41,6 +41,8 @@ const Vote = () => {
     }
   };
 
+  const darkTheme = useSelector((state) => state.status.darkTheme);
+
   return (
     <div className="app_pages_container">
       <div
@@ -57,7 +59,12 @@ const Vote = () => {
                 ? "rgba(0,255,0, 0.08)"
                 : "transparent",
 
-            border: isError === true || (isError === false && "1px solid #eee"),
+            border:
+              isError === true || isError === false
+                ? darkTheme
+                  ? "1px solid #444"
+                  : "1px solid #eee"
+                : "",
           }}
         >
           {isError === true ? (
