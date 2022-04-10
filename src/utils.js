@@ -20,7 +20,7 @@ const connector = new WalletConnect({
 });
 
 const humanizeAddr = (address) =>
-  address.substring(0, 3) + "..." + address.substring(55, 58);
+  address.substring(0, 4) + "..." + address.substring(54, 58);
 
 const createTransaction = (amount, recipientAddr, senderAddr, currency) => {
   const returnData = algodClient

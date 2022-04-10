@@ -100,7 +100,12 @@ const Donate = () => {
         />
       </div>
 
-      <div className="vote_card">
+      <div
+        className="vote_card"
+        style={{
+          display: !loading && donations.length === 0 ? "none" : "flex",
+        }}
+      >
         <p className="hd_title">Project Details</p>
         <hr className="vert_line" />
 

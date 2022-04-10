@@ -51,8 +51,9 @@ const Slider = ({ arr, type, current, loading, PrevSlide, NextSlide }) => {
           ) : (
             <div className="loading_container">
               <p>
-                No {type === "vote" ? "Approvals" : "Donations"} available
-                currently server
+                {type === "vote"
+                  ? "No project currently needs approval, check the Donate section to fund approved projects 👇🏽"
+                  : "There are currently no approved projects, visit the Approval page to vote for your favourite project(s) 👇🏽"}
               </p>
             </div>
           )}
@@ -68,23 +69,33 @@ const Slider = ({ arr, type, current, loading, PrevSlide, NextSlide }) => {
 
           <div>
             <div
-              className={current === 1 ? "nav_button_fade" : "nav_button"}
+              className={
+                current === 1 || arr.length === 0
+                  ? "nav_button_fade"
+                  : "nav_button"
+              }
               onClick={PrevSlide}
               style={{
-                opacity: current === 1 ? 0.4 : 1,
-                cursor: current === 1 ? "not-allowed" : "pointer",
+                opacity: current === 1 || arr.length === 0 ? 0.4 : 1,
+                cursor:
+                  current === 1 || arr.length === 0 ? "not-allowed" : "pointer",
               }}
             >
               Prev
             </div>
             <div
               className={
-                current === arr.length ? "nav_button_fade" : "nav_button"
+                current === arr.length || arr.length === 0
+                  ? "nav_button_fade"
+                  : "nav_button"
               }
               onClick={NextSlide}
               style={{
-                opacity: current === arr.length ? 0.4 : 1,
-                cursor: current === arr.length ? "not-allowed" : "pointer",
+                opacity: current === arr.length || arr.length === 0 ? 0.4 : 1,
+                cursor:
+                  current === arr.length || arr.length === 0
+                    ? "not-allowed"
+                    : "pointer",
               }}
             >
               Next

@@ -1,4 +1,3 @@
-import Switch from "react-switch";
 import { useDispatch, useSelector } from "react-redux";
 
 const Toggle = () => {
@@ -15,25 +14,15 @@ const Toggle = () => {
   };
 
   return (
-    <Switch
-      checked={darkTheme}
-      onChange={handleChange}
-      handleDiameter={20}
-      offColor="transparent"
-      onColor="transparent"
-      offHandleColor="#222"
-      onHandleColor="#777"
-      height={26}
-      width={60}
-      borderRadius={50}
-      activeBoxShadow="0px 0px 1px 2px transparent"
-      uncheckedIcon={<></>}
-      checkedIcon={<></>}
-      uncheckedHandleIcon={<> </>}
-      checkedHandleIcon={<></>}
-      className="react-switch"
-      id="small-radius-switch"
-    />
+    <>
+      <div className="mode_button" onClick={handleChange}>
+        {darkTheme ? (
+          <i className="ph-sun-dim"></i>
+        ) : (
+          <i className="ph-moon"></i>
+        )}
+      </div>
+    </>
   );
 };
 
