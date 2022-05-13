@@ -3,15 +3,16 @@ import algosdk from "algosdk";
 import WalletConnectQRCodeModal from "algorand-walletconnect-qrcode-modal";
 import WalletConnect from "@walletconnect/client";
 
+const ASA_ID = 297995609;
 const myAlgoConnect = new MyAlgoConnect();
 const algodClient = new algosdk.Algodv2(
   "",
-  "https://node.testnet.algoexplorerapi.io",
+  "https://node.algoexplorerapi.io",
   ""
 );
 const indexerClient = new algosdk.Indexer(
   "",
-  "https://algoindexer.testnet.algoexplorerapi.io",
+  "https://algoindexer.algoexplorerapi.io",
   ""
 );
 const connector = new WalletConnect({
@@ -43,7 +44,7 @@ const createTransaction = (amount, recipientAddr, senderAddr, currency) => {
             from: senderAddr,
             to: recipientAddr,
             amount: amount,
-            assetIndex: 71501663,
+            assetIndex: ASA_ID,
             suggestedParams,
           });
         return transaction;
@@ -108,4 +109,5 @@ export {
   canMakeApprovalTxn,
   canMakeDonationTxn,
   connector,
+  ASA_ID,
 };

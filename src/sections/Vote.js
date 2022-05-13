@@ -2,6 +2,7 @@ import Slider from "../components/Slider";
 import React, { useEffect, useState } from "react";
 import ProjectDetailsSlider from "../components/ProjectDetailsSlider";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Vote = () => {
   // Current Slide Index
@@ -117,31 +118,14 @@ const Vote = () => {
         />
 
         <div className="vote_button_website">
-          <button
-            className="vote_button"
-            onClick={() => {
-              if (!!approvals[current - 1]) {
-                dispatch({
-                  type: "use_modal",
-                  modalData: {
-                    ...approvals[current - 1],
-                    type: "vote",
-                    currency: "CHOICE",
-                  },
-                });
-              }
-            }}
-          >
-            Vote for project
-          </button>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={`https://${approvals[current - 1]?.long_description}`}
-            className="prj_website"
-          >
-            <i className="ph-arrow-square-out-fill"></i>
-          </a>
+          {!!approvals[current - 1]?.id ? (
+            <Link
+              className="vote_button"
+              to={`/preview/${approvals[current - 1]?.id}`}
+            >
+              View project
+            </Link>
+          ) : null}
         </div>
       </div>
     </div>

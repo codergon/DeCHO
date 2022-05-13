@@ -8,6 +8,7 @@ import {
   canMakeApprovalTxn,
   canMakeDonationTxn,
   connector,
+  ASA_ID,
 } from "../utils";
 import { encodeUnsignedTransaction } from "algosdk";
 import { formatJsonRpcRequest } from "@json-rpc-tools/utils";
@@ -44,7 +45,7 @@ const AppModal = () => {
     if (modalData.currency === "ALGO") {
       canMakeDonationTxn(connectedWalletAddr, newAmountToSend * 1000000);
     } else if (modalData.currency === "CHOICE") {
-      canMakeApprovalTxn(connectedWalletAddr, 71501663, newAmountToSend);
+      canMakeApprovalTxn(connectedWalletAddr, ASA_ID, newAmountToSend);
     }
 
     createTransaction(

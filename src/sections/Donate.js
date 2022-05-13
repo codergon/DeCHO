@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "../components/Slider";
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import ProjectDetailsSlider from "../components/ProjectDetailsSlider";
 
@@ -117,31 +118,14 @@ const Donate = () => {
         />
 
         <div className="vote_button_website">
-          <button
-            className="vote_button"
-            onClick={() => {
-              if (!!donations[current - 1]) {
-                dispatch({
-                  type: "use_modal",
-                  modalData: {
-                    ...donations[current - 1],
-                    type: "donate",
-                    currency: "ALGO",
-                  },
-                });
-              }
-            }}
-          >
-            Donate towards project
-          </button>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={`https://${donations[current - 1]?.long_description}`}
-            className="prj_website"
-          >
-            <i className="ph-arrow-square-out-fill"></i>
-          </a>
+          {!!donations[current - 1]?.id ? (
+            <Link
+              className="vote_button"
+              to={`/preview/${donations[current - 1]?.id}`}
+            >
+              View project
+            </Link>
+          ) : null}
         </div>
       </div>
     </div>
